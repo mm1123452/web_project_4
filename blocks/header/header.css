@@ -1,0 +1,12 @@
+.header {
+  margin: 8.75% 0 0;
+  max-height:5.6rem;
+  margin-top: 10%;
+}
+
+@media only screen and (min-width: 426px) {
+  .header {
+    margin-top: 4.5rem;
+  }
+}
+
