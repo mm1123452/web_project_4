@@ -1,0 +1,24 @@
+.profile__info {
+ margin-top: 5%;
+ margin-bottom:13%;
+
+ display:flex;
+ align-items: center;
+ flex-wrap:wrap;
+}
+
+@media only screen and (min-width: 426px) and (max-width: 469px){
+  .profile__info {
+    margin: 0 0 0 2%;
+    width:55%;
+  }
+}
+
+@media only screen and (min-width: 470px) {
+  .profile__info {
+    margin: 0 0 0 3.5%;
+    width:53%;
+    max-width:27rem;
+  }
+}
+

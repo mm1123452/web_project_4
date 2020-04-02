@@ -1,0 +1,15 @@
+.profile__name{
+  font-weight: 500;
+  font-size:2.2rem;
+  line-height:5.6rem;
+  margin:0 1.3rem 0 auto;
+  text-align:center;
+  flex:0 0 75%;
+}
+
+@media only screen and (min-width: 426px) {
+  .profile__name{
+    margin:0 ;
+    flex:initial;
+  }
+}
