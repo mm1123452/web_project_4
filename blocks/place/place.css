@@ -1,0 +1,29 @@
+@import url(./__icon/place__icon.css);
+@import url(./__image/place__image.css);
+@import url(./__info/place__info.css);
+@import url(./__name/place__name.css);
+
+.place {
+  align-self:stretch;
+}
+.place:not(:last-child) {
+  margin-bottom:8%;
+}
+
+.place:nth-of-type(5) {
+ display:none;
+}
+
+.place:nth-of-type(6) {
+  display:none;
+}
+
+@media only screen and (min-width: 769px) {
+  .place:nth-of-type(5) {
+    display:initial;
+   }
+
+   .place:nth-of-type(6) {
+     display:initial;
+   }
+}
