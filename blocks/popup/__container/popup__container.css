@@ -1,0 +1,13 @@
+.popup__container {
+  color:#000;
+  height:100%;
+  margin:35% auto 0;
+}
+
+@media only screen and (min-width: 500px) {
+  .popup__container {
+    margin:19.5rem auto 0;
+
+  }
+}
+
