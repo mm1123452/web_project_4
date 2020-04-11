@@ -1,12 +1,14 @@
 .header {
-  margin: 8.75% 0 0;
   max-height:5.6rem;
-  margin-top: 10%;
+  margin: 8.75% 0 0;
+  padding-bottom:10%;
+  border-bottom:1px solid #545454;
 }
 
 @media only screen and (min-width: 426px) {
   .header {
     margin-top: 4.5rem;
+    padding-bottom:4.1rem;
   }
 }
 

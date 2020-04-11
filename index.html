@@ -9,48 +9,35 @@
 <body class="page">
   <header class="header">
     <img class="logo" src="./images/whiteTextLogo.svg" alt="logo">
-   <div class="line"></div>
   </header>
   <section class="profile">
     <img class="avatar" src="./images/avatar.jpg" alt="avatar">
     <div class="profile__info">
-      <h1 class="profile__name">Jacques Cousteau</h1>
-      <svg class="profile__edit" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none">
-        <path d="M10 1.328L2.604 8.767 1.283 7.42 8.66 0 10 1.328zM0 10l1.962-.588L.585 8.083 0 10z" fill="#fff"/>
-      </svg>
-      <p class="profile__title">Explorer</p>
+      <div class="profile__text">
+        <h1 class="profile__name">Jacques Cousteau</h1>
+        <p class="profile__title">Explorer</p>
+      </div>
+      <button class="button button_edit"></button>
     </div>
-    <svg class="button" xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-    fill="none">
-      <path d="M22 9.778h-9.778V0H9.778v9.778H0v2.444h9.778V22h2.444v-9.778H22V9.778z" fill="#fff"/>
-    </svg>
+    <button class="button button_add"></button>
   </section>
   <aside class="popup">
     <div class="popup__container">
       <form class="popup__form">
         <h2 class="popup__title">Edit profile</h2>
-        <input class="popup__name" type="text" placeholder="Name">
-        <input class="popup__about" type="text" placeholder="About Me">
+        <input class="popup__name" type="text" placeholder="Name" maxlength="16">
+        <input class="popup__about" type="text" placeholder="About Me" >
         <button class="popup__button">Save</button>
         <div class="popup__exit"></div>
       </form>
-
     </div>
-
   </aside>
   <ul class="places">
     <li class="place">
       <img class="place__image" src="./images/yosemite-valley.png"  alt="yosemite valley">
       <div class="place__info">
         <p class="place__name">Yosemite Valley</p>
-        <svg class="place__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="19" fill="none">
-          <path d="M19.154 9.338c2.14-2.14 2.14-5.615 0-7.733a5.49 5.49 0 0 0-7.755 0l-1.038
-          1.06-1.038-1.038c-2.14-2.16-5.615-2.16-7.734-.02C.55 2.643 0 4.02 0 5.482a5.52 5.52
-          0 0 0 1.589 3.877l8.772 8.77 8.793-8.793zM1.356 5.482a3.97 3.97 0 0 1 1.208-2.881c.805-.805
-          1.843-1.208 2.882-1.208s2.076.403 2.882 1.208l2.034 2.013 2.034-2.034C13.984 1 16.6 1 18.158
-          2.58c.763.763 1.208 1.78 1.208 2.88a3.97 3.97 0 0 1-1.208
-          2.881L10.36 16.16 2.564 8.364c-.763-.784-1.208-1.8-1.208-2.88z" fill="#000"/>
-        </svg>
+        <div class="place__icon"></div>
       </div>
     </li>
 
@@ -58,14 +45,7 @@
       <img class="place__image" src="./images/lake-louise.png"  alt="lake louise">
       <div class="place__info">
         <p class="place__name">Lake Louise</p>
-        <svg class="place__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="19" fill="none">
-          <path d="M19.154 9.338c2.14-2.14 2.14-5.615 0-7.733a5.49 5.49 0 0 0-7.755 0l-1.038
-          1.06-1.038-1.038c-2.14-2.16-5.615-2.16-7.734-.02C.55 2.643 0 4.02 0 5.482a5.52 5.52
-          0 0 0 1.589 3.877l8.772 8.77 8.793-8.793zM1.356 5.482a3.97 3.97 0 0 1 1.208-2.881c.805-.805
-          1.843-1.208 2.882-1.208s2.076.403 2.882 1.208l2.034 2.013 2.034-2.034C13.984 1 16.6 1 18.158
-          2.58c.763.763 1.208 1.78 1.208 2.88a3.97 3.97 0 0 1-1.208
-          2.881L10.36 16.16 2.564 8.364c-.763-.784-1.208-1.8-1.208-2.88z" fill="#000"/>
-        </svg>
+        <div class="place__icon"></div>
       </div>
     </li>
 
@@ -73,14 +53,7 @@
       <img class="place__image" src="./images/bald-mountains.png"  alt="Bald Mountains">
       <div class="place__info">
         <p class="place__name">Bald Mountains</p>
-        <svg class="place__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="19" fill="none">
-          <path d="M19.154 9.338c2.14-2.14 2.14-5.615 0-7.733a5.49 5.49 0 0 0-7.755 0l-1.038
-          1.06-1.038-1.038c-2.14-2.16-5.615-2.16-7.734-.02C.55 2.643 0 4.02 0 5.482a5.52 5.52
-          0 0 0 1.589 3.877l8.772 8.77 8.793-8.793zM1.356 5.482a3.97 3.97 0 0 1 1.208-2.881c.805-.805
-          1.843-1.208 2.882-1.208s2.076.403 2.882 1.208l2.034 2.013 2.034-2.034C13.984 1 16.6 1 18.158
-          2.58c.763.763 1.208 1.78 1.208 2.88a3.97 3.97 0 0 1-1.208
-          2.881L10.36 16.16 2.564 8.364c-.763-.784-1.208-1.8-1.208-2.88z" fill="#000"/>
-        </svg>
+        <div class="place__icon"></div>
       </div>
     </li>
 
@@ -88,29 +61,15 @@
       <img class="place__image" src="./images/latemar.png"  alt="Latemar">
       <div class="place__info">
         <p class="place__name">Latemar</p>
-        <svg class="place__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="19" fill="none">
-          <path d="M19.154 9.338c2.14-2.14 2.14-5.615 0-7.733a5.49 5.49 0 0 0-7.755 0l-1.038
-          1.06-1.038-1.038c-2.14-2.16-5.615-2.16-7.734-.02C.55 2.643 0 4.02 0 5.482a5.52 5.52
-          0 0 0 1.589 3.877l8.772 8.77 8.793-8.793zM1.356 5.482a3.97 3.97 0 0 1 1.208-2.881c.805-.805
-          1.843-1.208 2.882-1.208s2.076.403 2.882 1.208l2.034 2.013 2.034-2.034C13.984 1 16.6 1 18.158
-          2.58c.763.763 1.208 1.78 1.208 2.88a3.97 3.97 0 0 1-1.208
-          2.881L10.36 16.16 2.564 8.364c-.763-.784-1.208-1.8-1.208-2.88z" fill="#000"/>
-        </svg>
+        <div class="place__icon"></div>
       </div>
     </li>
 
     <li class="place">
       <img class="place__image" src="./images/vanois-National.png"  alt="Vanois">
       <div class="place__info">
-        <p class="place__name">Vanois National...</p>
-        <svg class="place__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="19" fill="none">
-          <path d="M19.154 9.338c2.14-2.14 2.14-5.615 0-7.733a5.49 5.49 0 0 0-7.755 0l-1.038
-          1.06-1.038-1.038c-2.14-2.16-5.615-2.16-7.734-.02C.55 2.643 0 4.02 0 5.482a5.52 5.52
-          0 0 0 1.589 3.877l8.772 8.77 8.793-8.793zM1.356 5.482a3.97 3.97 0 0 1 1.208-2.881c.805-.805
-          1.843-1.208 2.882-1.208s2.076.403 2.882 1.208l2.034 2.013 2.034-2.034C13.984 1 16.6 1 18.158
-          2.58c.763.763 1.208 1.78 1.208 2.88a3.97 3.97 0 0 1-1.208
-          2.881L10.36 16.16 2.564 8.364c-.763-.784-1.208-1.8-1.208-2.88z" fill="#000"/>
-        </svg>
+        <p class="place__name">Vanois National Park</p>
+        <div class="place__icon"></div>
       </div>
     </li>
 
@@ -118,14 +77,7 @@
       <img class="place__image" src="./images/lago-diBraies.png"  alt="Lago di Braies">
       <div class="place__info">
         <p class="place__name">Lago di Braies</p>
-        <svg class="place__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="19" fill="none">
-          <path d="M19.154 9.338c2.14-2.14 2.14-5.615 0-7.733a5.49 5.49 0 0 0-7.755 0l-1.038
-          1.06-1.038-1.038c-2.14-2.16-5.615-2.16-7.734-.02C.55 2.643 0 4.02 0 5.482a5.52 5.52
-          0 0 0 1.589 3.877l8.772 8.77 8.793-8.793zM1.356 5.482a3.97 3.97 0 0 1 1.208-2.881c.805-.805
-          1.843-1.208 2.882-1.208s2.076.403 2.882 1.208l2.034 2.013 2.034-2.034C13.984 1 16.6 1 18.158
-          2.58c.763.763 1.208 1.78 1.208 2.88a3.97 3.97 0 0 1-1.208
-          2.881L10.36 16.16 2.564 8.364c-.763-.784-1.208-1.8-1.208-2.88z" fill="#000"/>
-        </svg>
+        <div class="place__icon"></div>
       </div>
     </li>
   </ul>
