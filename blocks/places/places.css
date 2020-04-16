@@ -15,9 +15,9 @@
   }
 }
 
-
 @media only screen and (min-width: 1025px) {
   .places {
+    margin:5.75% auto 0;
     width:100%;
     display:grid;
     grid-template-columns: 31.83% 31.83% 31.83%;

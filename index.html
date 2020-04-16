@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="root">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,81 +8,83 @@
 </head>
 <body class="page">
   <header class="header">
-    <img class="logo" src="./images/whiteTextLogo.svg" alt="logo">
+    <div class="logo" ></div>
   </header>
-  <section class="profile">
-    <img class="avatar" src="./images/avatar.jpg" alt="avatar">
-    <div class="profile__info">
-      <div class="profile__text">
+  <main>
+    <section class="profile">
+      <img class="avatar" src="./images/avatar.jpg" alt="avatar">
+      <div class="profile__info">
         <h1 class="profile__name">Jacques Cousteau</h1>
+        <button class="button button_edit"></button>
         <p class="profile__title">Explorer</p>
       </div>
-      <button class="button button_edit"></button>
-    </div>
-    <button class="button button_add"></button>
-  </section>
-  <aside class="popup">
-    <div class="popup__container">
-      <form class="popup__form">
-        <h2 class="popup__title">Edit profile</h2>
-        <input class="popup__name" type="text" placeholder="Name" maxlength="16">
-        <input class="popup__about" type="text" placeholder="About Me" >
-        <button class="popup__button">Save</button>
-        <div class="popup__exit"></div>
-      </form>
-    </div>
-  </aside>
-  <ul class="places">
-    <li class="place">
-      <img class="place__image" src="./images/yosemite-valley.png"  alt="yosemite valley">
-      <div class="place__info">
-        <p class="place__name">Yosemite Valley</p>
-        <div class="place__icon"></div>
-      </div>
-    </li>
+      <button class="button button_add"></button>
+    </section>
+    <section>
+      <ul class="places">
+        <li class="place">
+          <img class="place__image" src="./images/yosemite-valley.png"  alt="yosemite valley">
+          <div class="place__info">
+            <h3 class="place__name">Yosemite Valley</h3>
+            <div class="place__icon"></div>
+          </div>
+        </li>
 
-    <li class="place">
-      <img class="place__image" src="./images/lake-louise.png"  alt="lake louise">
-      <div class="place__info">
-        <p class="place__name">Lake Louise</p>
-        <div class="place__icon"></div>
-      </div>
-    </li>
+        <li class="place">
+          <img class="place__image" src="./images/lake-louise.png"  alt="lake louise">
+          <div class="place__info">
+            <h3 class="place__name">Lake Louise</h3>
+            <div class="place__icon"></div>
+          </div>
+        </li>
 
-    <li class="place">
-      <img class="place__image" src="./images/bald-mountains.png"  alt="Bald Mountains">
-      <div class="place__info">
-        <p class="place__name">Bald Mountains</p>
-        <div class="place__icon"></div>
-      </div>
-    </li>
+        <li class="place">
+          <img class="place__image" src="./images/bald-mountains.png"  alt="Bald Mountains">
+          <div class="place__info">
+            <h3 class="place__name">Bald Mountains</h3>
+            <div class="place__icon"></div>
+          </div>
+        </li>
 
-    <li class="place">
-      <img class="place__image" src="./images/latemar.png"  alt="Latemar">
-      <div class="place__info">
-        <p class="place__name">Latemar</p>
-        <div class="place__icon"></div>
-      </div>
-    </li>
+        <li class="place">
+          <img class="place__image" src="./images/latemar.png"  alt="Latemar">
+          <div class="place__info">
+            <h3 class="place__name">Latemar</h3>
+            <div class="place__icon"></div>
+          </div>
+        </li>
 
-    <li class="place">
-      <img class="place__image" src="./images/vanois-National.png"  alt="Vanois">
-      <div class="place__info">
-        <p class="place__name">Vanois National Park</p>
-        <div class="place__icon"></div>
-      </div>
-    </li>
+        <li class="place">
+          <img class="place__image" src="./images/vanois-National.png"  alt="Vanois">
+          <div class="place__info">
+            <h3 class="place__name">Vanois National Park</h3>
+            <div class="place__icon"></div>
+          </div>
+        </li>
 
-    <li class="place">
-      <img class="place__image" src="./images/lago-diBraies.png"  alt="Lago di Braies">
-      <div class="place__info">
-        <p class="place__name">Lago di Braies</p>
-        <div class="place__icon"></div>
+        <li class="place">
+          <img class="place__image" src="./images/lago-diBraies.png"  alt="Lago di Braies">
+          <div class="place__info">
+            <h3 class="place__name">Lago di Braies</h3>
+            <div class="place__icon"></div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <aside class="popup">
+      <div class="popup__container">
+        <form class="popup__form">
+          <h2 class="popup__title">Edit profile</h2>
+          <input class="popup__name" type="text" placeholder="Name">
+          <input class="popup__about" type="text" placeholder="About Me" >
+          <button class="popup__button">Save</button>
+          <button class="popup__exit"></button>
+        </form>
       </div>
-    </li>
-  </ul>
+    </aside>
+  </main>
   <footer class="footer">
-    <p class="footer__text">© 2020 Around The U.S.</p>
+    <p class="footer__copyright">© 2020 Around The U.S.</p>
   </footer>
   <script src="script.js"></script>
 </body>

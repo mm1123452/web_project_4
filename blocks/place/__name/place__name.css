@@ -6,6 +6,8 @@
   line-height:2.9rem;
   margin-right:auto;
   margin-left:8%;
+  max-width:19.5rem;
+  overflow:auto;
 }
 
 @media only screen and (min-width: 500px) {
@@ -13,7 +15,6 @@
     text-overflow: ellipsis;
     overflow:hidden;
     white-space: nowrap;
-
     max-width:71%;
   }
 }

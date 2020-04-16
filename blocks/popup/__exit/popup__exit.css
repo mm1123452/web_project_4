@@ -1,10 +1,15 @@
 .popup__exit {
   background-image: url(../../../images/CloseIcon.svg);
   position:absolute;
+  background-position: center;
   top:-40px;
   right:-30px;
-  height:40.7px;
-  width:40.7px;
+  height:4.07rem;
+  width:4.07rem;
+  padding:0;
+  border:none;
+  background-color: transparent;
+  text-align: center;
 }
 
 .popup__exit:hover {

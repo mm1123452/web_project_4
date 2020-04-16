@@ -1,4 +1,4 @@
-.footer__text {
+.footer__copyright {
   color:#545454;
   font-size:1.4rem;
   line-height:1.7rem;
@@ -6,7 +6,7 @@
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1024px){
-  .footer__text {
+  .footer__copyright{
     margin:0 0 0 calc((100% - 95%)/2);
     font-size:1.8rem;
     line-height:2.2rem;
@@ -14,7 +14,7 @@
 }
 
 @media only screen and (min-width: 1025px) {
-  .footer__text {
+  .footer__copyright {
     margin:0 0 0 auto;
     font-size:1.8rem;
     line-height:1.2rem;

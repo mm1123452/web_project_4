@@ -6,17 +6,30 @@
 .profile {
   margin: 13.1% auto 0;
   width:88%;
-  height:28.6rem;
+  min-height:28.6rem;
 
   display:flex;
   flex-direction: column;
 }
 
-@media only screen and (min-width: 426px) {
+@media only screen and (min-width: 426px) and (max-width: 768px)  {
   .profile {
+    min-height:0;
     max-height:120px;
     max-width:882px;
     width:97%;
+    margin:4rem 0 0;
+
+    flex-direction:row;
+    align-items:center;
+    flex-wrap:nowrap;
+   }
+}
+
+@media only screen and (min-width: 769px) {
+  .profile {
+    min-height:0;
+    width:100%;
     margin:4rem 0 0;
 
     flex-direction:row;

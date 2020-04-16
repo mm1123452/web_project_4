@@ -13,7 +13,8 @@ function handleEdit() {
   jobInput.value =  profileTitle.textContent;
 }
 
-function handleExit() {
+function handleExit(evt) {
+  evt.preventDefault();
   popUp.classList.toggle('popup_opened');
 }
 
