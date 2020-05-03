@@ -7,7 +7,7 @@
 
 @media only screen and (min-width: 500px) and (max-width: 1024px){
   .footer__copyright{
-    margin:0 0 0 calc((100% - 95%)/2);
+    margin:0 0 0 calc((100% - 95%) / 2 ) ;
     font-size:1.8rem;
     line-height:2.2rem;
   }

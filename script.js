@@ -88,8 +88,9 @@ const addCard = (card) => {
   placeContainer.append(placeElement)
 }
 
-const togglePopUp = (element) => {
-  event.preventDefault()
+const togglePopUp = (element,event) => {
+  event ? event.preventDefault() : null
+
   if (!element.classList.contains('popup_opened')) {
     nameInput.value = profileName.textContent
     aboutInput.value = profileTitle.textContent
