@@ -7,16 +7,22 @@ const editPopup = document.querySelector('.popup_type_edit');
 const editPopupExitButton = editPopup.querySelector('.popup__exit');
 const editForm = editPopup.querySelector('.popup__form');
 
-//Form data
-const nameInput = editForm.querySelector('.popup__name');
-const aboutInput = editForm.querySelector('.popup__about');
-
 //Add place popup
 const addPlacePopup = document.querySelector('.popup_type_add-place');
 const addPlacePopupExitButton = addPlacePopup.querySelector('.popup__exit');
 const addPlaceForm = addPlacePopup.querySelector('.popup__form');
 const addPlaceCaption = addPlacePopup.querySelector('.popup__name');
 const addPlaceImageLink = addPlacePopup.querySelector('.popup__about');
+
+// Large Image popup
+const largeImagePopup = document.querySelector('.popup_type_large-image');
+const largeImagePopupExitButton = largeImagePopup.querySelector('.popup__exit');
+const largeImage = largeImagePopup.querySelector('.popup__image');
+const largeImageTitle = largeImagePopup.querySelector('.popup__image-title');
+
+//Form data
+const nameInput = editForm.querySelector('.popup__name');
+const aboutInput = editForm.querySelector('.popup__about');
 
 //DOM Elements
 const profileName =  document.querySelector('.profile__name');
@@ -51,42 +57,54 @@ const initialCards = [
   }
 ];
 
-function addCard(card) {
+const addCard = (card) => {
   const {name,link} = card
   const placeElement =  cardTemplate.cloneNode(true)
   const likeIcon = placeElement.querySelector(".place__icon")
   const deleteIcon = placeElement.querySelector(".place__delete")
+  const image =  placeElement.querySelector(".place__image")
+  const placeName =   placeElement.querySelector(".place__name")
 
-  placeElement.querySelector(".place__name").textContent = name;
-  placeElement.querySelector(".place__image").src = link;
-  placeElement.querySelector(".place__image").alt = name
+  placeName.textContent = name;
+  image.src = link;
+  image.alt = name
 
  likeIcon.addEventListener('click', () => {
-    console.log('heart clicked')
-    //TODO implement icon button handler
+    likeIcon.classList.toggle('place__icon_liked')
   })
 
-  deleteIcon.addEventListener('click', () => {
-    console.log('delete clicked')
-    //TODO implement icon button handler
+  deleteIcon.addEventListener('click', (evt) => {
+    const parentElenment = evt.target.parentElement
+    parentElenment.remove()
  })
 
-   //TODO implement enlarge image
+   image.addEventListener('click', () => {
+    largeImageTitle.textContent = placeName.textContent
+    largeImage.src= image.src
 
+     togglePopUp(largeImagePopup )
+
+   })
   placeContainer.append(placeElement)
 }
 
-function togglePopUp(element) {
+const togglePopUp = (element) => {
+  event.preventDefault()
   if (!element.classList.contains('popup_opened')) {
     nameInput.value = profileName.textContent
     aboutInput.value = profileTitle.textContent
   }
 
+  if (element.classList.contains('popup_type_large-image') &&
+     element.classList.contains('popup_opened') ) {
+    largeImageTitle.textContent=''
+    largeImage.src= ''
+  }
+
   element.classList.toggle('popup_opened')
 }
 
-
-function editFormSubmitHandler (evt) {
+const editFormSubmitHandler = (evt) => {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value
@@ -94,7 +112,7 @@ function editFormSubmitHandler (evt) {
   togglePopUp(editPopup)
 }
 
-function addPlaceFormSubmitHandler (evt) {
+const addPlaceFormSubmitHandler = (evt)  =>{
   evt.preventDefault();
 
   const name = addPlaceCaption.value
@@ -106,31 +124,20 @@ function addPlaceFormSubmitHandler (evt) {
   addPlaceImageLink.value = ''
 }
 
+const renderCards = (cardArray) => {
+  cardArray.forEach(card => addCard(card))
+}
 
 //EVENT LISTENERS
-window.addEventListener('load', () => {
-  initialCards.forEach((card) => addCard(card))
-});
+const addEventListenerCreator = (element, type, callback) => {
+  element.addEventListener(type, callback)
+}
+addEventListenerCreator(window, 'load', renderCards.bind(null,initialCards) )
+addEventListenerCreator(editButton, 'click', togglePopUp.bind(null,editPopup) )
+addEventListenerCreator(editPopupExitButton, 'click', togglePopUp.bind(null,editPopup) )
+addEventListenerCreator(addPlacePopupExitButton, 'click', togglePopUp.bind(null,addPlacePopup) )
+addEventListenerCreator(addPlaceButton, 'click', togglePopUp.bind(null,addPlacePopup) )
+addEventListenerCreator(largeImagePopupExitButton, 'click', togglePopUp.bind(null,largeImagePopup) )
+addEventListenerCreator(editForm, 'submit', editFormSubmitHandler)
+addEventListenerCreator(addPlaceForm, 'submit', addPlaceFormSubmitHandler)
 
-editButton.addEventListener('click', (e) => {
-  e.preventDefault()
-  togglePopUp(editPopup)
-})
-
-editPopupExitButton.addEventListener('click', (e) => {
-  e.preventDefault()
-  togglePopUp(editPopup)
-})
-
-addPlacePopupExitButton.addEventListener('click', (e) => {
-  e.preventDefault()
-  togglePopUp(addPlacePopup)
-})
-
-addPlaceButton.addEventListener('click', (e) => {
-  e.preventDefault()
-  togglePopUp(addPlacePopup)
-})
-
-editForm.addEventListener('submit', editFormSubmitHandler)
-addPlaceForm.addEventListener('submit', addPlaceFormSubmitHandler)

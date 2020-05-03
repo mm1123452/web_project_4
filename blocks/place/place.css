@@ -1,4 +1,5 @@
 @import url(./__icon/place__icon.css);
+@import url(./__icon/_liked/place__icon_liked.css);
 @import url(./__image/place__image.css);
 @import url(./__info/place__info.css);
 @import url(./__name/place__name.css);
