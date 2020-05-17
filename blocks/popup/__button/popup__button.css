@@ -1,13 +1,14 @@
 .popup__button {
   width:80%;
+  max-width:35.8rem;
   background-color: #000;
   color:#FFF;
   cursor:pointer;
-  margin-top:10.5%;
-  margin-left:7.5%;
-  margin-bottom:8.5%;
-  font-size:1.4rem;
-  line-height:1.7rem;
+  margin: 7.5% auto 8.5% 8%;
+
+
+  font-size:1.8rem;
+  line-height:2.2rem;
   border-radius:.2rem;
 
   padding: 4% 0;

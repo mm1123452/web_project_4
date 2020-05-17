@@ -4,10 +4,15 @@
   font-size:1.4rem;
   line-height:1.7rem;
   padding:0 0 3% 0;
-  margin:5% 0 0 8.5%;
+  margin:3% 0 0 8.5%;
   width:85%;
 }
 
 .popup__about:focus {
   outline:none;
+}
+
+
+.popup__about.popup__error_visible {
+  border-bottom:1px solid red;
 }

@@ -5,10 +5,13 @@
 @import url(./__name/popup__name.css);
 @import url(./__about/popup__about.css);
 @import url(./__button/popup__button.css);
+@import url(./__button/_disabled/popup__button_disabled.css);
 @import url(./__exit/popup__exit.css);
 @import url(./__image/popup__image.css);
 @import url(./__image-title/popup__image-title.css);
 @import url(./__image-figure/popup__image-figure.css);
+@import url(./__input/_type/_error/popup__input_type_error.css);
+@import url(./__error/_visible/popup__error_visible.css);
 
 .popup {
   background-color: rgba(0,0,0,.9);

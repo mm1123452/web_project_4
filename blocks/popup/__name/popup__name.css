@@ -11,3 +11,6 @@
 .popup__name:focus {
   outline:none;
 }
+.popup__name.popup__error_visible {
+  border-bottom:1px solid red;
+}
