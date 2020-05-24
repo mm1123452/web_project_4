@@ -39,8 +39,8 @@ const enableValidation = ({formSelector, submitButtonSelector, errorClass, inact
     const submitButton = form.querySelector(submitButtonSelector)
 
     form.addEventListener('submit', (e) => {
-      e.preventDefault()
-    })
+       e.preventDefault()
+     })
 
     form.addEventListener('input', (e) => {
       checkInputValidation(form, e.target, errorClass)

@@ -11,6 +11,9 @@
 .popup__name:focus {
   outline:none;
 }
-.popup__name.popup__error_visible {
+
+.popup__error_visible.popup__name:invalid {
   border-bottom:1px solid red;
 }
+
+

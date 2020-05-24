@@ -2,17 +2,20 @@ const popupContainer = Array.from(document.querySelectorAll('.popup'));
 //Edit popup
 const editPopup = document.querySelector('.popup_type_edit');
 const editForm = editPopup.querySelector('.popup__form');
+const editExit =  editPopup.querySelector('.popup__exit');
 
 //Add place popup
 const addPlacePopup = document.querySelector('.popup_type_add-place');
 const addPlaceForm = addPlacePopup.querySelector('.popup__form');
 const addPlaceCaption = addPlacePopup.querySelector('.popup__name');
 const addPlaceImageLink = addPlacePopup.querySelector('.popup__about');
+const addPlacePopupExit =  addPlacePopup.querySelector('.popup__exit');
 
 // Large Image popup
 const largeImagePopup = document.querySelector('.popup_type_large-image');
 const largeImage = largeImagePopup.querySelector('.popup__image');
 const largeImageTitle = largeImagePopup.querySelector('.popup__image-title');
+const largeImageExit = largeImagePopup.querySelector('.popup__exit');
 
 //Form data
 const nameInput = editForm.querySelector('.popup__name');
@@ -89,8 +92,8 @@ const togglePopUp = (element) => {
 }
 
 const editFormSubmitHandler = (evt) => {
-  evt.preventDefault();
 
+  evt.preventDefault();
   profileName.textContent = nameInput.value
   profileTitle.textContent = aboutInput.value
   togglePopUp(editPopup)
@@ -122,17 +125,15 @@ const handleOpen = (e) => {
   } else if (e.target.classList.contains('button_add')) {
     togglePopUp(addPlacePopup)
   }
-
 }
 
-const handleClose = (e) => {
+const handleClose = (e, popup,form) => {
   e.preventDefault()
+  e.stopPropagation()
 
   if (e.target.classList.contains('popup__container') ||
       e.target.classList.contains('popup__exit') ) {
-
-    togglePopUp(e.currentTarget)
-    form =   e.currentTarget.querySelector('.popup__form')
+    togglePopUp(popup)
     if (form) {
       formReset(form)
     }
@@ -146,19 +147,23 @@ const handlePress = (e) => {
   }
 }
 
+const handleClick = (e) => {
+  if (e.target.classList.contains('popup__container')) {
+    togglePopUp(e.target.parentElement)
+  }
+}
+
 //EVENT LISTENERS
 const addEventListenerCreator = (element, type, callback) => {
   element.addEventListener(type, callback)
 }
 
+addEventListenerCreator(window, 'click', handleClick )
 addEventListenerCreator(window, 'keydown', handlePress )
 addEventListenerCreator(window, 'load', renderCards.bind(null,initialCards) )
-addEventListenerCreator(editForm, 'submit', editFormSubmitHandler)
 addEventListenerCreator(addPlaceForm, 'submit', addPlaceFormSubmitHandler)
-
-popupContainer.forEach(popup => {
-  addEventListenerCreator(popup,'click',handleClose)
-})
+addEventListenerCreator(editForm, 'submit', editFormSubmitHandler)
 addEventListenerCreator(profile, 'click', handleOpen )
-
-
+addEventListenerCreator(largeImageExit , 'click', togglePopUp.bind(null,largeImagePopup))
+addEventListenerCreator(editExit, 'click',(e) => handleClose(e,editPopup))
+addEventListenerCreator(addPlacePopupExit, 'click',(e) => handleClose(e,addPlacePopup ,addPlaceForm))

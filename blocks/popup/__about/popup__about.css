@@ -12,7 +12,8 @@
   outline:none;
 }
 
-
-.popup__about.popup__error_visible {
+ .popup__error_visible.popup__about:invalid {
   border-bottom:1px solid red;
 }
+
+
