@@ -5,6 +5,7 @@
   height:5rem;
   padding:0;
   margin-left:auto;
+  cursor:pointer;
 }
 
 .button.button_add  {

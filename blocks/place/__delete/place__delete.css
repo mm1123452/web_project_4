@@ -5,6 +5,7 @@
   position:absolute;
   top:1.8rem;
   right:1.5rem;
+  cursor:pointer;
 }
 
 .place__delete:hover {
