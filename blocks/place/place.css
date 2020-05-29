@@ -6,16 +6,16 @@
 @import url(./__delete/place__delete.css);
 
 .place {
-  align-self:stretch;
   position:relative;
-  margin-bottom: 6%;
+   margin: 0 auto 6%;
+   width:28.2rem;
 }
 
 .place:last-child {
   margin-bottom:0;
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 585px) {
   .place {
     margin-bottom: 0;
   }

@@ -5,11 +5,12 @@
   width:88%;
 }
 
-@media only screen and (min-width: 500px) and (max-width: 1024px){
+@media only screen and (min-width: 585px) and (max-width: 899px){
   .places {
-    width:95%;
+    width:99%;
+    max-width: 582px;
     display:grid;
-    grid-template-columns: 48.87% 48.87%;
+    grid-template-columns: 28.2rem 28.2rem;
     grid-template-rows: minmax(392px,auto) auto;
     grid-column-gap: 2.25%;
     grid-row-gap:1.75%;
@@ -17,10 +18,11 @@
   }
 }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 900px) {
   .places {
     margin:5.75% auto 0;
     width:100%;
+    max-width: 882px;
     display:grid;
     grid-template-columns: 31.83% 31.83% 31.83%;
     grid-template-rows: auto auto;
