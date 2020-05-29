@@ -1,32 +1,32 @@
-const showError = (form,input,errorClass) => {
-const errorEl = form.querySelector(`#popup__${input.name}-error`);
+const showError = (form, input, errorClass) => {
+  const errorEl = form.querySelector(`#popup__${input.name}-error`);
 
   errorEl.textContent = input.validationMessage;
   errorEl.classList.add(errorClass);
   input.classList.add(errorClass);
 }
 
-const hideError = (form,input,errorClass) => {
+const hideError = (form, input, errorClass) => {
   const errorEl = form.querySelector(`#popup__${input.name}-error`);
   errorEl.classList.remove(errorClass);
   input.classList.remove(errorClass);
   errorEl.textContent = "";
 }
 
-const checkInputValidation = (form,input,errorClass) => {
-   if (input.validity.valid ) {
-     hideError(form,input,errorClass);
-   } else {
-    showError(form,input,errorClass);
-   }
+const checkInputValidation = (form, input, errorClass) => {
+  if (input.validity.valid) {
+    hideError(form, input, errorClass);
+  } else {
+    showError(form, input, errorClass);
+  }
 }
 
-const toggleButtonState = (form,submitButton, inputSelector, inactiveButtonClass) => {
+const toggleButtonState = (form, submitButton, inputSelector, inactiveButtonClass) => {
   const inputs = Array.from(form.querySelectorAll(inputSelector));
 
   const validInput = inputs.every(input => input.validity.valid);
 
-  if(validInput) {
+  if (validInput) {
     submitButton.classList.remove(inactiveButtonClass);
     submitButton.disabled = false;
   } else {
@@ -35,15 +35,15 @@ const toggleButtonState = (form,submitButton, inputSelector, inactiveButtonClass
   }
 }
 
-const enableValidation = ({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, errorClass, ...rest}) => {
+const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, errorClass, ...rest }) => {
   const forms = Array.from(document.querySelectorAll(formSelector));
 
   forms.forEach(form => {
     const submitButton = form.querySelector(submitButtonSelector);
 
     form.addEventListener("submit", (e) => {
-       e.preventDefault();
-     })
+      e.preventDefault();
+    })
 
     form.addEventListener("input", (e) => {
       checkInputValidation(form, e.target, errorClass);

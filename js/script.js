@@ -2,15 +2,18 @@ const popupContainer = Array.from(document.querySelectorAll(".popup"));
 //Edit popup
 const editPopup = document.querySelector(".popup_type_edit");
 const editForm = editPopup.querySelector(".popup__form");
-const editExit =  editPopup.querySelector(".popup__exit");
+const editExit = editPopup.querySelector(".popup__exit");
+const editError = editForm.querySelectorAll(".popup__input_type_error")
+const editFormSubmit = editForm.querySelector(".popup__button");
 
 //Add place popup
 const addPlacePopup = document.querySelector(".popup_type_add-place");
 const addPlaceForm = addPlacePopup.querySelector(".popup__form");
 const addPlaceCaption = addPlacePopup.querySelector(".popup__name");
 const addPlaceImageLink = addPlacePopup.querySelector(".popup__about");
-const addPlacePopupExit =  addPlacePopup.querySelector(".popup__exit");
+const addPlacePopupExit = addPlacePopup.querySelector(".popup__exit");
 const addPlacePopupsubmit = addPlacePopup.querySelector(".popup__button");
+const addPlaceError = addPlaceForm.querySelectorAll(".popup__input_type_error")
 addPlacePopupsubmit.disabled = true;
 
 // Large Image popup
@@ -20,13 +23,13 @@ const largeImageTitle = largeImagePopup.querySelector(".popup__image-title");
 const largeImageExit = largeImagePopup.querySelector(".popup__exit");
 
 //Form data
-const nameInput = editForm.querySelector(".popup__name")
+const nameInput = editForm.querySelector(".popup__name");
 const aboutInput = editForm.querySelector(".popup__about");
 
 //DOM Elements
-const profile=  document.querySelector(".profile");
-const profileName =  document.querySelector(".profile__name");
-const profileTitle =  document.querySelector(".profile__title");
+const profile = document.querySelector(".profile");
+const profileName = document.querySelector(".profile__name");
+const profileTitle = document.querySelector(".profile__title");
 const placeContainer = document.querySelector(".places");
 const cardTemplate = document.querySelector("#place-template").content;
 
@@ -58,33 +61,35 @@ const initialCards = [
 ];
 
 const addCard = (card) => {
-  const {name,link} = card;
-  const placeElement =  cardTemplate.cloneNode(true);
+  const { name, link } = card;
+  const placeElement = cardTemplate.cloneNode(true);
   const likeIcon = placeElement.querySelector(".place__icon");
   const deleteIcon = placeElement.querySelector(".place__delete");
-  const image =  placeElement.querySelector(".place__image");
+  const image = placeElement.querySelector(".place__image");
   const placeName = placeElement.querySelector(".place__name");
 
   placeName.textContent = name;
   image.src = link;
   image.alt = name;
 
- likeIcon.addEventListener("click", () => {
+  likeIcon.addEventListener("click", () => {
     likeIcon.classList.toggle("place__icon_liked");
   })
 
   deleteIcon.addEventListener("click", (evt) => {
     const parentElenment = evt.target.parentElement;
     parentElenment.remove();
- })
+  })
 
   image.addEventListener("click", () => {
     largeImageTitle.textContent = '';
-    largeImage.src= '';
+    largeImage.src = '';
     largeImageTitle.textContent = placeName.textContent;
-    largeImage.src= image.src;
+    largeImage.src = image.src;
 
-    togglePopUp(largeImagePopup );
+    togglePopUp(largeImagePopup);
+    addEventListenerCreator(window, 'click', handleClick);
+    addEventListenerCreator(window, 'keydown', handlePress);
   })
   placeContainer.append(placeElement);
 }
@@ -93,11 +98,10 @@ const togglePopUp = (element) => {
   element.classList.toggle("popup_opened");
 
   if (!element.classList.contains("popup_opened")) {
-    window.removeEventListener("click",handleClick);
-    window.removeEventListener("keydown",handlePress);
+    window.removeEventListener("click", handleClick);
+    window.removeEventListener("keydown", handlePress);
   }
 }
-
 
 const editFormSubmitHandler = (evt) => {
   evt.preventDefault();
@@ -115,7 +119,7 @@ const addPlaceFormSubmitHandler = (evt) => {
   const name = addPlaceCaption.value;
   const link = addPlaceImageLink.value;
 
-  addCard({name,link});
+  addCard({ name, link });
   togglePopUp(addPlacePopup);
   formReset(evt.target);
 }
@@ -124,25 +128,42 @@ const renderCards = (cardArray) => {
   cardArray.forEach(card => addCard(card));
 }
 
-const handleOpen = (e) => {
-  if (e.target.classList.contains("button_edit")) {
-      nameInput.value = profileName.textContent;
-      aboutInput.value = profileTitle.textContent;
-      togglePopUp(editPopup );
-  } else if (e.target.classList.contains('button_add')) {
-    togglePopUp(addPlacePopup);
-  }
-
-  addEventListenerCreator(window, 'click', handleClick );
-  addEventListenerCreator(window, 'keydown', handlePress );
+const clearErrorField = (element) => {
+  element.classList.remove('popup__error_visible')
 }
 
-const handleClose = (e, popup,form) => {
+const enableButton = (element) => {
+  if (element.classList.contains('popup__button_disabled')) {
+    element.classList.remove('popup__button_disabled')
+    element.disabled = false;
+  }
+}
+
+const handleOpen = (e) => {
+  if (e.target.classList.contains("button_edit")) {
+    //Clear previous errors
+    editError.forEach(errorField => clearErrorField(errorField))
+    enableButton(editFormSubmit)
+
+    nameInput.value = profileName.textContent;
+    aboutInput.value = profileTitle.textContent;
+
+    togglePopUp(editPopup);
+  } else if (e.target.classList.contains('button_add')) {
+
+    addPlaceError.forEach(errorField => clearErrorField(errorField))
+    togglePopUp(addPlacePopup);
+  }
+  addEventListenerCreator(window, 'click', handleClick);
+  addEventListenerCreator(window, 'keydown', handlePress);
+}
+
+const handleClose = (e, popup, form) => {
   e.preventDefault();
   e.stopPropagation();
 
   if (e.target.classList.contains("popup__container") ||
-      e.target.classList.contains("popup__exit") ) {
+    e.target.classList.contains("popup__exit")) {
     togglePopUp(popup);
     if (form) {
       formReset(form);
@@ -151,9 +172,9 @@ const handleClose = (e, popup,form) => {
 }
 
 const handlePress = (e) => {
-  open =  document.querySelector(".popup_opened");
+  const open = document.querySelector(".popup_opened");
   if (e.key === 'Escape' && open) {
-     togglePopUp(open);
+    togglePopUp(open);
   }
 }
 
@@ -168,10 +189,10 @@ const addEventListenerCreator = (element, type, callback) => {
   element.addEventListener(type, callback);
 }
 
-addEventListenerCreator(window, "load", renderCards.bind(null,initialCards));
+addEventListenerCreator(window, "load", renderCards.bind(null, initialCards));
 addEventListenerCreator(addPlaceForm, "submit", addPlaceFormSubmitHandler);
 addEventListenerCreator(editForm, "submit", editFormSubmitHandler);
 addEventListenerCreator(profile, "click", handleOpen);
-addEventListenerCreator(largeImageExit , "click", togglePopUp.bind(null,largeImagePopup));
-addEventListenerCreator(editExit, "click",(e) => handleClose(e,editPopup));
-addEventListenerCreator(addPlacePopupExit, "click",(e) => handleClose(e,addPlacePopup ,addPlaceForm));
+addEventListenerCreator(largeImageExit, "click", togglePopUp.bind(null, largeImagePopup));
+addEventListenerCreator(editExit, "click", (e) => handleClose(e, editPopup, editForm));
+addEventListenerCreator(addPlacePopupExit, "click", (e) => handleClose(e, addPlacePopup, addPlaceForm));
