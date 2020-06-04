@@ -1,3 +1,5 @@
+import {Card} from './Card.js'
+
 const popupContainer = Array.from(document.querySelectorAll(".popup"));
 //Edit popup
 const editPopup = document.querySelector(".popup_type_edit");
@@ -60,39 +62,45 @@ const initialCards = [
   }
 ];
 
-const addCard = (card) => {
-  const { name, link } = card;
-  const placeElement = cardTemplate.cloneNode(true);
-  const likeIcon = placeElement.querySelector(".place__icon");
-  const deleteIcon = placeElement.querySelector(".place__delete");
-  const image = placeElement.querySelector(".place__image");
-  const placeName = placeElement.querySelector(".place__name");
+// const addCard = (card) => {
+//   const { name, link } = card;
+//   const placeElement = cardTemplate.cloneNode(true);
+//   const likeIcon = placeElement.querySelector(".place__icon");
+//   const deleteIcon = placeElement.querySelector(".place__delete");
+//   const image = placeElement.querySelector(".place__image");
+//   const placeName = placeElement.querySelector(".place__name");
 
-  placeName.textContent = name;
-  image.src = link;
-  image.alt = name;
+//   placeName.textContent = name;
+//   image.src = link;
+//   image.alt = name;
 
-  likeIcon.addEventListener("click", () => {
-    likeIcon.classList.toggle("place__icon_liked");
-  })
+//   likeIcon.addEventListener("click", () => {
+//     likeIcon.classList.toggle("place__icon_liked");
+//   })
 
-  deleteIcon.addEventListener("click", (evt) => {
-    const parentElenment = evt.target.parentElement;
-    parentElenment.remove();
-  })
+//   deleteIcon.addEventListener("click", (evt) => {
+//     const parentElenment = evt.target.parentElement;
+//     parentElenment.remove();
+//   })
 
-  image.addEventListener("click", () => {
-    largeImageTitle.textContent = '';
-    largeImage.src = '';
-    largeImageTitle.textContent = placeName.textContent;
-    largeImage.src = image.src;
+//   image.addEventListener("click", () => {
+//     largeImageTitle.textContent = '';
+//     largeImage.src = '';
+//     largeImageTitle.textContent = placeName.textContent;
+//     largeImage.src = image.src;
 
-    togglePopUp(largeImagePopup);
-    addEventListenerCreator(window, 'click', handleClick);
-    addEventListenerCreator(window, 'keydown', handlePress);
-  })
-  placeContainer.append(placeElement);
-}
+//     togglePopUp(largeImagePopup);
+//     addEventListenerCreator(window, 'click', handleClick);
+//     addEventListenerCreator(window, 'keydown', handlePress);
+//   })
+//   placeContainer.append(placeElement);
+// }
+
+const addCard = (data) => {
+  const card = new Card(data, "#place-template")
+  const cardElement = card.generateCard()
+  placeContainer.append(cardElement);
+ }
 
 const togglePopUp = (element) => {
   element.classList.toggle("popup_opened");
