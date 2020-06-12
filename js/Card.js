@@ -1,3 +1,5 @@
+import { Popup } from './Popup.js'
+
 export class Card {
   constructor(data, cardSelector) {
     this._text = data.name;
@@ -5,12 +7,10 @@ export class Card {
     this._cardSelector = cardSelector;
   }
 
-  //It has private methods for working with markup and adding event listeners.
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
       .content
-     // .querySelector(".card")
       .cloneNode(true);
 
     return cardElement;
@@ -18,26 +18,25 @@ export class Card {
 
   _setEventListeners() {
     const likeIcon = this._element.querySelector(".place__icon")
+    const deleteIcon = this._element.querySelector(".place__delete");
+    const image = this._element.querySelector(".place__image");
 
     likeIcon.addEventListener("click", () => {
       likeIcon.classList.toggle("place__icon_liked");
     })
-    // this._element.querySelector(".place__delete");
 
+    deleteIcon.addEventListener("click", (evt) => {
+      const parentElenment = evt.target.parentElement;
+      parentElenment.remove();
+    })
 
-
-    //   this._element.addEventListener('click', () => {
-    //     this._handleOpenPopup()
-    //   })
-
-    //   popupCloseButton.addEventListener('click', () => {
-    //     this._handleClosePopup()
-    //   })
+    image.addEventListener("click", () => {
+      const data = { text: this._text, image: this._imgLink }
+      const imagePopup = new Popup(data, '.popup_type_large-image')
+      imagePopup.popupSelector('image')
+    })
   }
 
-  //It has private methods for each event handler.
-
-  //It has one public method that returns a fully functional card element populated with data.
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners()
@@ -45,7 +44,6 @@ export class Card {
     const image = this._element.querySelector(".place__image")
     image.src = this._imgLink;
     image.alt = this._text;
-
 
     this._element.querySelector(".place__name").textContent = this._text;
 
