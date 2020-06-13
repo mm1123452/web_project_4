@@ -1,6 +1,6 @@
 import { Card } from './Card.js'
-import { Popup } from './Popup.js'
 import { FormValidator } from './FormValidator.js'
+import {popupSelector} from './utils.js'
 
 //Edit popup
 const editPopup = document.querySelector(".popup_type_edit");
@@ -94,12 +94,9 @@ const enableValidation = ({ formSelector, ...rest }) => {
 const handleOpen = (e) => {
   if (e.target.classList.contains("button_edit")) {
     const data = { name: profileName.textContent, title: profileTitle.textContent }
-    const editPopup = new Popup(data, '.popup_type_edit')
-    editPopup.popupSelector('edit')
-
+    popupSelector('edit', '.popup_type_edit',data)
   } else if (e.target.classList.contains('button_add')) {
-    const addPopup = new Popup({}, '.popup_type_add-place')
-    addPopup.popupSelector('add')
+    popupSelector('add','.popup_type_add-place')
   }
 }
 
