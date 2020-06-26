@@ -1,5 +1,3 @@
-import {popupSelector} from './utils.js'
-
 export class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._text = data.name;
@@ -32,10 +30,7 @@ export class Card {
     })
 
     image.addEventListener("click", () => {
-      //const data = { text: this._text, image: this._imgLink }
-      //popupSelector('image','.popup_type_large-image',data)
       this._handleCardClick({image: this._imgLink, text: this._text})
-
     })
   }
 

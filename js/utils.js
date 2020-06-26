@@ -4,34 +4,34 @@ let image = null;
 let title = null;
 
 
-const popupSelector = (popupType,elementSelector,data) => {
+const popupSelector = (popupType, elementSelector, data) => {
   type = popupType;
 
   if (popupType === 'image') {
-    openLargeImagePopup(data,elementSelector)
-  } else if (popupType === 'edit')  {
-    openeditPopup(data,elementSelector)
+    openLargeImagePopup(data, elementSelector)
+  } else if (popupType === 'edit') {
+    openeditPopup(data, elementSelector)
   } else if (popupType === 'add') {
     openAddPopup(elementSelector)
   }
 }
 
-const openLargeImagePopup = (data,elementSelector) => {
+const openLargeImagePopup = (data, elementSelector) => {
   element = document.querySelector(elementSelector)
-  image =  element.querySelector(".popup__image")
+  image = element.querySelector(".popup__image")
   title = element.querySelector(".popup__image-title")
 
   image.src = data.image;
   image.alt = data.text;
-  title.textContent =  data.text
+  title.textContent = data.text
 
-   togglePopupClass(element)
-   setEventListeners(element)
+  togglePopupClass(element)
+  setEventListeners(element)
 }
 
-const openeditPopup = (data,elementSelector) => {
+const openeditPopup = (data, elementSelector) => {
   element = document.querySelector(elementSelector)
-  const nameInput =  element.querySelector(".popup__name")
+  const nameInput = element.querySelector(".popup__name")
   const titleInput = element.querySelector(".popup__about")
 
   nameInput.value = data.name;
@@ -47,27 +47,27 @@ const openAddPopup = (elementSelector) => {
 }
 
 
-const togglePopupClass = (element)  => {
+const togglePopupClass = (element) => {
   element.classList.toggle("popup_opened");
 }
 
 const setEventListeners = (element) => {
   if (element.classList.contains('popup_opened')) {
-    window.addEventListener("click",clickHandler )
-    window.addEventListener("keydown", escapeHandler )
+    window.addEventListener("click", clickHandler)
+    window.addEventListener("keydown", escapeHandler)
   }
 }
 
-const handleWindowClick =  (e) => {
+const handleWindowClick = (e) => {
   if (e.target.classList.contains("popup__container") ||
-      e.target.classList.contains("popup__exit")  ||
-      e.target.classList.contains("popup__button") ) {
+    e.target.classList.contains("popup__exit") ||
+    e.target.classList.contains("popup__button")) {
     togglePopupClass(element)
     closePopup()
   }
 }
 
-const handleEscapeKey =  (e) => {
+const handleEscapeKey = (e) => {
   if (e.key === 'Escape' && open) {
     togglePopupClass(element)
     closePopup()
@@ -86,23 +86,13 @@ const closeLargeImagePopup = () => {
   title = ""
 }
 
-const removeWindowEventListeners =  () => {
-  window.removeEventListener("click", clickHandler )
-  window.removeEventListener("keydown", escapeHandler )
+const removeWindowEventListeners = () => {
+  window.removeEventListener("click", clickHandler)
+  window.removeEventListener("keydown", escapeHandler)
 }
 
 const clickHandler = handleWindowClick.bind(this)
 const escapeHandler = handleEscapeKey.bind(this)
 
 
-
-
-
-
-
-
-
-
-
-
-export {popupSelector};
+export { popupSelector };

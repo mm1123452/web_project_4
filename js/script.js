@@ -1,26 +1,32 @@
 import { Card } from './Card.js'
+import {Section} from './Section.js'
+import {PopupWithImage} from './PopupWithImage.js'
+import {PopupWithForm} from './PopupWithForm.js'
+//import {UserInfo} from './UserInfo.js'
 import { FormValidator } from './FormValidator.js'
-import {popupSelector} from './utils.js'
+// import {popupSelector} from './utils.js'
+import { UserInfo } from './UserInfo.js';
 
 //Edit popup
-const editPopup = document.querySelector(".popup_type_edit");
-const editForm = editPopup.querySelector(".popup__form");
+
 
 //Add place popup
-const addPlacePopup = document.querySelector(".popup_type_add-place");
-const addPlaceForm = addPlacePopup.querySelector(".popup__form");
-const addPlaceCaption = addPlacePopup.querySelector(".popup__name");
-const addPlaceImageLink = addPlacePopup.querySelector(".popup__about");
+// const addPlacePopup = document.querySelector(".popup_type_add-place");
+// const addPlaceForm = addPlacePopup.querySelector(".popup__form");
+// const addPlaceCaption = addPlacePopup.querySelector(".popup__name");
+// const addPlaceImageLink = addPlacePopup.querySelector(".popup__about");
 
 //Form data
-const nameInput = editForm.querySelector(".popup__name");
-const aboutInput = editForm.querySelector(".popup__about");
+const editPopup = document.querySelector(".popup_type_edit");
+//const editForm = editPopup.querySelector(".popup__form");
+let nameInput = editPopup.querySelector(".popup__name");
+let aboutInput = editPopup.querySelector(".popup__about");
 
 //DOM Elements
 const profile = document.querySelector(".profile");
-const profileName = document.querySelector(".profile__name");
-const profileTitle = document.querySelector(".profile__title");
-const placeContainer = document.querySelector(".places");
+// const profileName = document.querySelector(".profile__name");
+// const profileTitle = document.querySelector(".profile__title");
+// const placeContainer = document.querySelector(".places");
 
 const initialCards = [
   {
@@ -49,39 +55,6 @@ const initialCards = [
   }
 ];
 
-const addCard = (data) => {
-  const card = new Card(data, "#place-template")
-  const cardElement = card.generateCard()
-  placeContainer.append(cardElement);
-}
-
-const editFormSubmitHandler = (evt) => {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileTitle.textContent = aboutInput.value;
-}
-
-const formReset = (form) => {
-  const button = form.querySelector('.popup__button')
-
-  form.reset();
-  button.disabled = true;
-  button.classList.add('popup__button_disabled')
-}
-
-const addPlaceFormSubmitHandler = (evt) => {
-  evt.preventDefault();
-  const name = addPlaceCaption.value;
-  const link = addPlaceImageLink.value;
-
-  addCard({ name, link });
-  formReset(evt.target);
-}
-
-const renderCards = (cardArray) => {
-  cardArray.forEach(card => addCard(card));
-}
-
 const enableValidation = ({ formSelector, ...rest }) => {
   const forms = Array.from(document.querySelectorAll(formSelector));
 
@@ -89,15 +62,6 @@ const enableValidation = ({ formSelector, ...rest }) => {
     const formValidation = new FormValidator(form, rest)
     formValidation.enableValidation()
   })
-}
-
-const handleOpen = (e) => {
-  if (e.target.classList.contains("button_edit")) {
-    const data = { name: profileName.textContent, title: profileTitle.textContent }
-    popupSelector('edit', '.popup_type_edit',data)
-  } else if (e.target.classList.contains('button_add')) {
-    popupSelector('add','.popup_type_add-place')
-  }
 }
 
 enableValidation({
@@ -109,14 +73,49 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
 });
 
+const handleProfileClick = (e) => {
+  if (e.target.classList.contains("button_edit")) {
 
-//EVENT LISTENERS
-const addEventListenerCreator = (element, type, callback) => {
-  element.addEventListener(type, callback);
+    const userInfo = new UserInfo({name: ".profile__name",job: ".profile__title"})
+    const {name, job}  = userInfo.getUserInfo()
+    nameInput.value = name;
+    aboutInput.value = job;
+    const popup = new PopupWithForm(
+      '.popup_type_edit',
+      (data) => {
+        console.log(data)
+        userInfo.setUserInfo(data)
+        popup.close()
+    })
+    popup.open()
+  } else if (e.target.classList.contains("button_add")) {
+    const popup = new PopupWithForm(
+      '.popup_type_add-place',
+      (data) => {
+       const {title:name, link} = data
+        addCard({name,link})
+        popup.close()
+    })
+    popup.open()
+  }
 }
 
-addEventListenerCreator(window, "load", renderCards.bind(null, initialCards));
-addEventListenerCreator(addPlaceForm, "submit", addPlaceFormSubmitHandler);
-addEventListenerCreator(editForm, "submit", editFormSubmitHandler);
-addEventListenerCreator(profile, "click", handleOpen);
+const addCard = (item) => {
+  const card = new Card(item, "#place-template", (item) => {
+    const imagePopup = new PopupWithImage('.popup_type_large-image', item)
+    imagePopup.open()
+  })
+  const cardElement = card.generateCard()
+  placesCard.addItem(cardElement)
+}
+
+const placesCard = new Section({
+  items: initialCards,
+  renderer: addCard
+}, ".places")
+
+placesCard.renderItems()
+
+
+profile.addEventListener("click", handleProfileClick)
 
