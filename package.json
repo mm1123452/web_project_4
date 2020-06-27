@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/MabelM1/web_project_4/issues"
   },
-  "homepage": "https://github.com/MabelM1/web_project_4#readme",
+  "homepage": "https://github.com/MabelM1/web_project_4/",
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
