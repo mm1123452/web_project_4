@@ -1,7 +1,7 @@
 .place__icon {
   align-self:flex-end;
   margin-right:5%;
-  background-image: url(../../../images/heart.svg);
+  background-image: url(/src/images/heart.svg);
   width:2.1rem;
   height:1.9rem;
   cursor:pointer;

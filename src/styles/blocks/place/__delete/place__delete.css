@@ -1,5 +1,5 @@
 .place__delete {
-  background-image: url(../../../images/delete.svg);
+  background-image: url(/src/images/delete.svg);
   width:1.8rem;
   height:1.93rem;
   position:absolute;
