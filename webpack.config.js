@@ -35,7 +35,14 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif|woff(2)?)$/,
         // file-loader should be used when processing those files
-        loader: "file-loader"
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images/'
+            }
+          }
+        ]
       },
       {
         test: /\.html$/,
