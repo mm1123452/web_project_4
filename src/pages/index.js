@@ -36,7 +36,6 @@ const handleProfileClick = (e) => {
       '.popup_type_edit',
       (data) => {
         userInfo.setUserInfo(data)
-        popup.close()
     })
     popup.open()
   } else if (e.target.classList.contains("button_add")) {
@@ -45,7 +44,6 @@ const handleProfileClick = (e) => {
       (data) => {
        const {title:name, link} = data
         addCard({name,link})
-        popup.close()
     })
     popup.open()
   }

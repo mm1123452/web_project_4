@@ -4,7 +4,7 @@
   "description": "## Description Responsive site featuring places in the US",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack",
+    "build": "rimraf dist && webpack",
     "dev": "webpack-dev-server --open --watch",
     "deploy": "npm run build && gh-pages -d dist"
   },

@@ -12,16 +12,15 @@ export class PopupWithForm extends Popup {
     const data = {}
 
     inputFields.forEach(input => {
-      const name = input.name === 'about' ? 'job' : input.name
-      data[name] = input.value
+      data[input.name] = input.value
     })
     return data
   }
 
   _submitHandler(e) {
     e.preventDefault()
-    const values = this._getInputValues()
-    this._handleSubmit(values)
+    this._handleSubmit(this._getInputValues())
+    this.close()
   }
 
   setEventListeners() {

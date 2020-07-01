@@ -7,11 +7,11 @@ export class FormValidator {
     this._setting = rest;
   }
 
-  _checkValidity(e) {
-    if (e.target.validity.valid) {
-      this._hideErrorMessage(e.target);
+  _checkValidity(input) {
+    if (input.validity.valid) {
+      this._hideErrorMessage(input);
     } else {
-      this._showErrorMessage(e.target);
+      this._showErrorMessage(input);
     }
   }
 
@@ -31,8 +31,7 @@ export class FormValidator {
   }
 
   _submitButtonState() {
-    const inputs = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    const validForm = inputs.every(input => input.validity.valid);
+    const validForm = this._inputFields.every(input => input.validity.valid);
     const submitButton = this._formElement.querySelector('.popup__button')
 
     if (validForm) {
@@ -45,9 +44,13 @@ export class FormValidator {
   }
 
   _setEventListeners() {
-    this._formElement.addEventListener("input", (e) => {
-      this._checkValidity(e)
-      this._submitButtonState()
+    this._inputFields = Array.from(this._formElement.querySelectorAll(this._inputSelector))
+
+    this._inputFields.forEach(input => {
+      input.addEventListener("input", () => {
+        this._checkValidity(input)
+        this._submitButtonState()
+      })
     })
   }
 
