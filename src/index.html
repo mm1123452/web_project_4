@@ -12,7 +12,13 @@
   </header>
   <main class="main">
     <section class="profile">
-      <img class="avatar" src="./images/avatar.jpg" alt="avatar">
+      <div class="overlay-container">
+          <div class="avatar"></div>
+          <div class="overlay">
+            <div class="edit"></div>
+          </div>
+      </div>
+
       <div class="profile__info">
         <h1 class="profile__name">Jacques Cousteau</h1>
         <button class="button button_edit"></button>
@@ -20,7 +26,7 @@
       </div>
       <button class="button button_add"></button>
     </section>
-    <section>
+    <section class="container">
       <ul class="places">
       </ul>
     </section>
@@ -58,6 +64,26 @@
       </form>
     </div>
   </aside>
+  <aside class="popup popup_type_confirm">
+    <div class="popup__container">
+      <form class="popup__form">
+        <h2 class="popup__title">Are you sure?</h2>
+        <button class="popup__button">Yes</button>
+        <button class="popup__exit"></button>
+      </form>
+    </div>
+  </aside>
+  <aside class="popup popup_type_profile-picture">
+    <div class="popup__container">
+      <form class="popup__form">
+        <h2 class="popup__title">Change profile picture</h2>
+        <input class="popup__input popup__photo"  type="url" placeholder="Image link" name="photo" required pattern="https?://.+">
+       <span id="popup__photo-error" class="popup__input_type_error"></span>
+        <button class="popup__button">Save</button>
+        <button class="popup__exit"></button>
+      </form>
+    </div>
+  </aside>
   <aside class="popup popup_type_large-image">
     <div class="popup__container">
       <figure class="popup__image-figure">
@@ -73,7 +99,10 @@
       <div class="place__delete"></div>
       <div class="place__info">
         <h3 class="place__name"></h3>
-        <div class="place__icon"></div>
+        <div class="place__icon-container">
+          <div class="place__icon"></div>
+          <span class="place__likes-count"></span>
+        </div>
       </div>
     </li>
   </template>
