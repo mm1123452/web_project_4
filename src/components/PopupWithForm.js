@@ -1,9 +1,8 @@
 import { Popup } from './Popup.js'
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, handleSubmit) {
+  constructor(popupSelector) {
     super(popupSelector)
-    this._handleSubmit = handleSubmit
     this._submitHandler = this._submitHandler.bind(this)
     this._closeButton =  this._popupSelector.querySelector('.popup__button')
   }
@@ -24,6 +23,10 @@ export class PopupWithForm extends Popup {
     this._closeButton.textContent = "Saving..."
     this._handleSubmit(this._getInputValues())
     this.close()
+  }
+
+  setSubmitFormCallback(callback) {
+    this._handleSubmit = callback
   }
 
   setEventListeners() {

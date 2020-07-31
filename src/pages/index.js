@@ -9,8 +9,11 @@ import {Api} from '../components/Api.js';
 import { nameInput, aboutInput, profile, editPhoto} from '../utils/constants.js'
 
 let placesCard = null;
-let imagePopup = null ;
-let formPopup = null;
+
+const formPopupConfirm = new PopupWithForm('.popup_type_confirm')
+const formPopupAdd = new PopupWithForm('.popup_type_add-place')
+const formPopupEdit = new PopupWithForm('.popup_type_edit')
+const formPopupProfileEdit = new PopupWithForm('.popup_type_profile-picture')
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-1",
@@ -21,6 +24,7 @@ const api = new Api({
 });
 
 const userInfo = new UserInfo({name: ".profile__name",job: ".profile__title",avatar: ".avatar"})
+const imagePopup = new PopupWithImage('.popup_type_large-image')
 
 let userId = null;
 
@@ -32,7 +36,7 @@ const fetchInitialData = () => {
 const fetchCards = () => {
   api.getInitialCards()
   .then(data => {
-    createSection(data.slice(-6))
+    createSection(data)
   })
   .catch( err => {
     console.log(err)
@@ -60,23 +64,15 @@ const createSection = (data) => {
   placesCard.renderItems()
 }
 
-const openImagePopup = (selector, data) => {
-  imagePopup = new PopupWithImage(selector,data)
-  imagePopup.open()
-}
-
-const openFormPopup = (selector,callback) => {
-  formPopup = new PopupWithForm(selector,callback)
-   formPopup.open()
-}
-
 const addCard = (item) => {
   const obj ={...item, userId}
 
   const card = new Card(obj, "#place-template", (data) => {
 
     if (data.image && data.text) {
-       openImagePopup('.popup_type_large-image',data)
+
+       imagePopup.open(data)
+
     } else if (data.cardId && data.method === 'put') {
 
       const res =  api.addLikes(data.cardId)
@@ -92,13 +88,14 @@ const addCard = (item) => {
       return res
 
      } else if (data.method === 'confirm') {
-
-      openFormPopup ('.popup_type_confirm',inputValues => {
+      formPopupConfirm.setSubmitFormCallback(
+        inputValues => {
         api.deleteCard(data.cardId)
           .then(res => {
             removeCard(data.cardId)
           })
       })
+      formPopupConfirm.open()
 
     }
   })
@@ -120,7 +117,7 @@ const handleProfileClick = (e) => {
      nameInput.value = name;
      aboutInput.value = job;
 
-    openFormPopup('.popup_type_edit',
+    formPopupEdit.setSubmitFormCallback(
       (data) => {
         const newObj = {name:data.name , about: data.job}
         api.updateProfileData(newObj)
@@ -130,22 +127,24 @@ const handleProfileClick = (e) => {
           })
         }
     )
+    formPopupEdit.open()
   } else if (e.target.classList.contains("button_add")) {
-    openFormPopup('.popup_type_add-place',
-      (data) => {
-          const {title:name, link} = data
+    formPopupAdd.setSubmitFormCallback(
+      data => {
+        const {title:name, link} = data
 
-          api.postCard({name,link})
-          .then(res => {
-            addCard(res)
-          })
-        }
-      )
+        api.postCard({name,link})
+        .then(res => {
+          addCard(res)
+        })
+      }
+    )
+    formPopupAdd.open()
   }
 }
 
 const handlePhotoUpdateClick = (e) => {
-  openFormPopup( '.popup_type_profile-picture',
+  formPopupProfileEdit.setSubmitFormCallback(
     (data) => {
       api.updateProfileAvatar(data.photo)
       .then(res => {
@@ -153,6 +152,7 @@ const handlePhotoUpdateClick = (e) => {
       })
     }
   )
+  formPopupProfileEdit.open()
 }
 
 const enableValidation = ({ formSelector, ...rest }) => {
