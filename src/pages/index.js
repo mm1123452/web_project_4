@@ -9,6 +9,8 @@ import {Api} from '../components/Api.js';
 import { nameInput, aboutInput, profile, editPhoto} from '../utils/constants.js'
 
 let placesCard = null;
+let imagePopup = null ;
+let formPopup = null;
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-1",
@@ -58,37 +60,46 @@ const createSection = (data) => {
   placesCard.renderItems()
 }
 
+const openImagePopup = (selector, data) => {
+  imagePopup = new PopupWithImage(selector,data)
+  imagePopup.open()
+}
+
+const openFormPopup = (selector,callback) => {
+  formPopup = new PopupWithForm(selector,callback)
+   formPopup.open()
+}
+
 const addCard = (item) => {
-  const data ={...item, userId}
-  const card = new Card(data, "#place-template", (data) => {
+  const obj ={...item, userId}
+
+  const card = new Card(obj, "#place-template", (data) => {
 
     if (data.image && data.text) {
-        const imagePopup = new PopupWithImage('.popup_type_large-image', data)
-        imagePopup.open()
-
+       openImagePopup('.popup_type_large-image',data)
     } else if (data.cardId && data.method === 'put') {
 
       const res =  api.addLikes(data.cardId)
-      .then(data => {
-        return data.likes
+      .then(value => {
+        return value.likes
       })
        return res
-
-    } else if (data.cardId && data.method === 'delete') {
+     } else if (data.cardId && data.method === 'delete') {
       const res =  api.deleteLikes(data.cardId)
-      .then(data => {
-        return data.likes
+      .then(value => {
+        return value.likes
       })
       return res
 
-    } else if (data.method === 'confirm') {
-      const comfirmPopup = new PopupWithForm('.popup_type_confirm', (item) => {
+     } else if (data.method === 'confirm') {
+
+      openFormPopup ('.popup_type_confirm',inputValues => {
         api.deleteCard(data.cardId)
           .then(res => {
             removeCard(data.cardId)
           })
       })
-      comfirmPopup.open()
+
     }
   })
 
@@ -108,41 +119,40 @@ const handleProfileClick = (e) => {
     const {name, job}  = userInfo.getUserInfo()
      nameInput.value = name;
      aboutInput.value = job;
-    const popup = new PopupWithForm(
-      '.popup_type_edit',
-      (data) => {
-        api.updateProfileData({name:data.name , about: data.job})
-        .then(({name,about}) => {
-           userInfo.setUserInfo({name, job:about})
-        })
 
-    })
-    popup.open()
+    openFormPopup('.popup_type_edit',
+      (data) => {
+        const newObj = {name:data.name , about: data.job}
+        api.updateProfileData(newObj)
+          .then((res) => {
+            const obj = {name: res.name, job:res.about}
+            userInfo.setUserInfo(obj)
+          })
+        }
+    )
   } else if (e.target.classList.contains("button_add")) {
-    const popup = new PopupWithForm(
-      '.popup_type_add-place',
+    openFormPopup('.popup_type_add-place',
       (data) => {
-        const {title:name, link} = data
+          const {title:name, link} = data
 
-        api.postCard({name,link})
-        .then(res => {
-          addCard(res)
-        })
-    })
-    popup.open()
+          api.postCard({name,link})
+          .then(res => {
+            addCard(res)
+          })
+        }
+      )
   }
 }
 
 const handlePhotoUpdateClick = (e) => {
-   const popup = new PopupWithForm(
-    '.popup_type_profile-picture',
+  openFormPopup( '.popup_type_profile-picture',
     (data) => {
       api.updateProfileAvatar(data.photo)
       .then(res => {
         userInfo.setUserInfo({avatar: res.avatar})
       })
-  })
-  popup.open()
+    }
+  )
 }
 
 const enableValidation = ({ formSelector, ...rest }) => {
